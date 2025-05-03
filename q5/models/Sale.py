@@ -53,7 +53,7 @@ class Sale(Base):
         
         return Sale(df_copy)
 
-    def calculate_MAP_and_LAG(self, group_cols, ref_value, map_col, lag_col) :
+    def calculate_MAP_and_LAG(self, group_cols, map_col, lag_col) :
         """
         Calculate MAP (Moving Average Price) and LAG (Lagged Sales) columns grouped by group_col
         Args:
@@ -67,11 +67,11 @@ class Sale(Base):
 
         df_copy = self.df.copy()
 
-        df_copy = df_copy.groupby(group_cols + ['date'])[ref_value].sum().reset_index()
+        df_copy = df_copy.groupby(group_cols + ['date'])['quantity'].sum().reset_index()
 
-        df_copy[map_col] = df_copy.groupby(group_cols)[ref_value].transform(lambda x: x.rolling(window=7, min_periods=1).mean())
+        df_copy[map_col] = df_copy.groupby(group_cols)['quantity'].transform(lambda x: x.rolling(window=7, min_periods=1).mean())
 
-        df_copy[lag_col] = df_copy.groupby(group_cols)[ref_value].shift(7)
+        df_copy[lag_col] = df_copy.groupby(group_cols)['quantity'].shift(7)
 
         return Sale(df_copy)
 

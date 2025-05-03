@@ -19,7 +19,6 @@ if __name__ == '__main__':
         full_date_sales_with_brand
             .calculate_MAP_and_LAG(
                 ["product", "store", "brand"],
-                ref_value="quantity",
                 map_col="MA7_P", lag_col="LAG7_P")
     )
 
@@ -27,7 +26,6 @@ if __name__ == '__main__':
         full_date_sales_with_brand
             .calculate_MAP_and_LAG(
             ["brand","store"],
-            ref_value="quantity",
             map_col="MA7_B", lag_col="LAG7_B"
         )
     )
@@ -36,7 +34,6 @@ if __name__ == '__main__':
         b_feat
             .calculate_MAP_and_LAG(
              ["store"],
-             ref_value="quantity",
              map_col="MA7_S", lag_col="LAG7_S"
         )
     )
