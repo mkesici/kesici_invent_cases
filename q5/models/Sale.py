@@ -69,9 +69,10 @@ class Sale(Base):
 
         df_copy = df_copy.groupby(group_cols + ['date'])['quantity'].sum().reset_index()
 
-        df_copy[map_col] = df_copy.groupby(group_cols)['quantity'].transform(lambda x: x.rolling(window=7, min_periods=1).mean())
-
-        df_copy[lag_col] = df_copy.groupby(group_cols)['quantity'].shift(7)
+        # Calculate both rolling mean and lag in a single groupby operation for better performance
+        grouped = df_copy.groupby(group_cols)['quantity']
+        df_copy[map_col] = grouped.transform(lambda x: x.rolling(window=7, min_periods=1).mean())
+        df_copy[lag_col] = grouped.shift(7)
 
         return Sale(df_copy)
 
