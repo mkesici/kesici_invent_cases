@@ -1,9 +1,9 @@
-from q5.models.Features import Features
-from q5.models.Brand import Brand
-from q5.models.Mape import Mape
-from q5.models.Product import Product
-from q5.models.Sale import Sale
-from q5.helper import parse_args
+from models.Features import Features
+from models.Brand import Brand
+from models.Mape import Mape
+from models.Product import Product
+from models.Sale import Sale
+from helper import parse_args
 
 
 if __name__ == '__main__':

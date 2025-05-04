@@ -1,4 +1,5 @@
 import pandas as pd
+from pathlib import Path
 
 
 class Base:
@@ -7,8 +8,8 @@ class Base:
 
     @classmethod
     def from_csv(cls, filename):
-        df = pd.read_csv(filename)
+        df = pd.read_csv(Path.cwd() / filename)
         return cls(df)
 
     def to_csv(self, filename):
-        self.df.to_csv(filename)
+        self.df.to_csv(Path.cwd() / filename)

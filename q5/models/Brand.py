@@ -1,4 +1,4 @@
-from q5.models.Base import Base
+from models.Base import Base
 
 
 class Brand(Base):
